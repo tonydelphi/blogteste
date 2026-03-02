@@ -1,0 +1,115 @@
+/* Variáveis de Cores para facilitar mudanças futuras */
+:root {
+    --primary-color: #003366; /* Azul Marinho */
+    --secondary-color: #ffcc00; /* Amarelo Ouro */
+    --bg-color: #f4f7f9;
+    --text-color: #333;
+    --white: #ffffff;
+    --danger: #d90429;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Cabeçalho */
+header {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 3rem 0;
+    text-align: center;
+    border-bottom: 6px solid var(--secondary-color);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Menu */
+nav {
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 0 15px;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+/* Layout Principal */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+main {
+    flex: 3;
+    min-width: 300px;
+}
+
+aside {
+    flex: 1;
+    min-width: 280px;}
+
+.map-wrapper {
+    margin: 20px auto;
+    max-width: 1000px; /* Limita a largura para não esticar demais */
+    padding: 10px;
+}
+
+#map {
+    width: 100%;
+    height: 450px; /* Altura ideal para ver o Brasil bem */
+    border-radius: 12px;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 1; /* Garante que o mapa não fique por cima do menu */
+}
+
+/* Estilo do balãozinho que abre no mapa */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    border-bottom: 4px solid var(--secondary-color);
+}
+
+.popup-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.popup-link:hover {
+    border-bottom: 1px solid var(--primary-color);
+}

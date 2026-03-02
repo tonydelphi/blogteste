@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Concursos | Delphi Concursos - O Oráculo</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>DELPHI CONCURSOS</h1>
+            <p>O Oráculo dos Concursos</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">Home</a>
+            <a href="categorias/editais.html">Editais</a>
+            <a href="mapa.html" style="color: var(--secondary-color); font-weight: bold;">Mapa de Concursos</a>
+            <a href="categorias/estudo.html">Dicas de Estudo</a>
+        </div>
+    </nav>
+
+    <div class="container" style="display: block;">
+        <main>
+            <div class="map-wrapper">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 15px;">📍 Radar de Oportunidades</h2>
+                
+                <div id="map"></div>
+                
+                <p style="text-align: center; margin-top: 15px; color: #666; font-size: 0.9rem;">
+                    O Oráculo mapeia os editais para você. Clique nos marcadores para detalhes.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p><strong>© 2026 Delphi Concursos</strong> - O Oráculo dos Concursos</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script>
+        // 1. Configura a visão inicial (Latitude, Longitude, Zoom)
+        // Zoom 4 mostra quase o Brasil todo.
+        var map = L.map('map').setView([-15.78, -47.93], 4);
+
+        // 2. Desenha o mapa usando o OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 3. ADICIONE SEUS PONTOS AQUI
+        // Para adicionar um novo ponto em Venâncio Aires, por exemplo:
+        L.marker([-29.6075, -52.1919]).addTo(map)
+            .bindPopup('<b>Concurso Venâncio Aires</b><br>Prefeitura Municipal<br><a href="#" class="popup-link">Ver Notícia</a>');
+
+        // Exemplo: Brasília
+        L.marker([-15.7941, -47.8825]).addTo(map)
+            .bindPopup('<b>Concurso Nacional Unificado</b><br>Vagas Federais<br><a href="categorias/editais.html" class="popup-link">Ver Detalhes</a>');
+        
+        // Adiciona a barra de busca ao mapa
+        var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false,
+        placeholder: "Pesquisar cidade ou região...",
+        errorMessage: "Local não encontrado."
+        })
+
+        .on('markgeocode', function(e) {
+        var bbox = e.geocode.bbox;
+        var poly = L.polygon([
+            bbox.getSouthEast(),
+            bbox.getNorthEast(),
+            bbox.getNorthWest(),
+            bbox.getSouthWest()
+        ]);
+        
+        map.fitBounds(poly.getBounds()); // Faz o mapa focar na área pesquisada
+        })
+        .addTo(map);
+    </script>
+</body>
+</html>
